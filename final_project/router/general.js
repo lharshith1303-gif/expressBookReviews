@@ -121,3 +121,40 @@ public_users.get('/asyncisbn/:isbn', async function (req, res) {
     }
 });
 
+public_users.get('/asyncauthor/:author', async function (req, res) {
+    const author = req.params.author;
+
+    try {
+        const response = await axios.get(`http://localhost:5000/author/${author}`);
+
+        return res.status(200).json({
+            message: "Books fetched successfully by author (Async/Await)",
+            data: response.data
+        });
+
+    } catch (error) {
+        return res.status(404).json({
+            message: "Error fetching books by author",
+            error: error.message
+        });
+    }
+});
+
+public_users.get('/asynctitle/:title', async function (req, res) {
+    const title = req.params.title;
+
+    try {
+        const response = await axios.get(`http://localhost:5000/title/${title}`);
+
+        return res.status(200).json({
+            message: "Books fetched successfully by title (Async/Await)",
+            data: response.data
+        });
+
+    } catch (error) {
+        return res.status(404).json({
+            message: "Error fetching books by title",
+            error: error.message
+        });
+    }
+});
